@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Pliki źródłowe">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Pliki zasobów">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Algorithms">
+      <UniqueIdentifier>{47dab95e-03f4-4da0-bbfd-d9e107cf4cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Algorithms\Sorting">
+      <UniqueIdentifier>{4d1c9484-6054-48a3-8b30-eef22162cdc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki zasobów\Excersises">
+      <UniqueIdentifier>{5715d371-2546-4142-b16f-4ee625b6419e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki zasobów\Excersises\Ch2">
+      <UniqueIdentifier>{7e17e5f6-6c73-4b9f-a404-10df4cfbf683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Algorithms\Searching">
+      <UniqueIdentifier>{b07f53e4-2f6d-453a-b97c-7817c1f4ab7e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Algorythimcs.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ch2.h">
+      <Filter>Pliki zasobów\Excersises\Ch2</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Sorting\insertion_sort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Sorting\merge_sort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Sorting\selection_sort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Searching\binary_search.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Searching</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Searching\linear_search.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Searching</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
