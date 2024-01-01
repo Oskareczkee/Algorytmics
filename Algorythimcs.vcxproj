@@ -136,6 +136,7 @@
     <ClInclude Include="Algorithms\Sorting\merge_sort.h" />
     <ClInclude Include="Algorithms\Sorting\selection_sort.h" />
     <ClInclude Include="Ch2.h" />
+    <ClInclude Include="Data Structures\Heap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

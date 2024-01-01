@@ -28,6 +28,9 @@
     <Filter Include="Pliki nagłówkowe\Algorithms\Searching">
       <UniqueIdentifier>{b07f53e4-2f6d-453a-b97c-7817c1f4ab7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Data Structures">
+      <UniqueIdentifier>{b24c72ff-2781-4a67-906a-cd58800e85d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algorythimcs.cpp">
@@ -52,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Algorithms\Searching\linear_search.h">
       <Filter>Pliki nagłówkowe\Algorithms\Searching</Filter>
+    </ClInclude>
+    <ClInclude Include="Data Structures\Heap.h">
+      <Filter>Pliki nagłówkowe\Data Structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

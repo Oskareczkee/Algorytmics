@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 #include <math.h>
+#include "Algorithms/Sorting/insertion_sort.h"
 
 /*
 * Merges the SORTED subarrays of arr array from A[p,q] to A[q+1,r]
@@ -60,4 +61,33 @@ inline void merge_sort(T* arr, const int& size, Comp compare_function = Comp())
 {
 	//subtract one since we don't really need size, but the last index
 	merge_sort(arr, 0, size-1, compare_function);
+}
+
+/*
+	Sorts array using merge sort, but for enough small subarrays of size k uses insertion sort to sort them
+*/
+template<class T, class Comp = std::less<T>>
+inline void insertion_merge_sort(T* arr, const int& p, const int& r, const int& k, Comp compare_function = Comp())
+{
+	if (k >= (r-p)) // one or zero element array
+	{
+		insertion_sort(arr + p, (r-p)+1, compare_function);
+		return;
+	}
+
+	int q = floor((p + r) / 2) ; // midpoint of A[p,r]
+	insertion_merge_sort(arr, p, q,k, compare_function); // sort A[p,q]
+	insertion_merge_sort(arr, q + 1, r,k, compare_function); // sort A[q+1,r]
+	merge(arr, p, q, r, compare_function); //merge sorted subarrays into one
+}
+
+
+/*
+	Sorts array using merge sort, but for enough small subarrays of size insertion_min_size uses insertion sort to sort them
+	Set insertion_min_size to best  fit your needs, for insetion_min_size=1 this will work like normal merge sort
+*/
+template<class T, class Comp = std::less<T>>
+inline void insertion_merge_sort(T* arr, const int& size, const int& insertion_min_size = 8, Comp compare_function = Comp())
+{
+	insertion_merge_sort(arr, 0, size-1,insertion_min_size, compare_function);
 }
