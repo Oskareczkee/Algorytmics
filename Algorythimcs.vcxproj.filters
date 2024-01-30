@@ -31,6 +31,12 @@
     <Filter Include="Pliki nagłówkowe\Data Structures">
       <UniqueIdentifier>{b24c72ff-2781-4a67-906a-cd58800e85d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Algorithms\Numerical">
+      <UniqueIdentifier>{a270bf8c-f552-471a-9c8c-e9e1d84bce68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Algorithms\Random">
+      <UniqueIdentifier>{d864bbae-d269-4cf5-896c-ecd17e43631c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algorythimcs.cpp">
@@ -58,6 +64,24 @@
     </ClInclude>
     <ClInclude Include="Data Structures\Heap.h">
       <Filter>Pliki nagłówkowe\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Numerical\array_inversion.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Numerical</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Numerical\horner.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Numerical</Filter>
+    </ClInclude>
+    <ClInclude Include="monge_array.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Numerical</Filter>
+    </ClInclude>
+    <ClInclude Include="array_permutations.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="random.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="propabilistic_counter.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Random</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

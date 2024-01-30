@@ -130,13 +130,19 @@
     <ClCompile Include="Algorythimcs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithms\Numerical\array_inversion.h" />
+    <ClInclude Include="Algorithms\Numerical\horner.h" />
     <ClInclude Include="Algorithms\Searching\binary_search.h" />
     <ClInclude Include="Algorithms\Searching\linear_search.h" />
     <ClInclude Include="Algorithms\Sorting\insertion_sort.h" />
     <ClInclude Include="Algorithms\Sorting\merge_sort.h" />
     <ClInclude Include="Algorithms\Sorting\selection_sort.h" />
+    <ClInclude Include="array_permutations.h" />
     <ClInclude Include="Ch2.h" />
     <ClInclude Include="Data Structures\Heap.h" />
+    <ClInclude Include="monge_array.h" />
+    <ClInclude Include="propabilistic_counter.h" />
+    <ClInclude Include="random.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
