@@ -9,12 +9,14 @@
 #include "Algorithms/Searching/binary_search.h"
 #include "Algorithms/Searching/linear_search.h"
 #include "Algorithms/Sorting/bubble_sort.h"
+#include "Algorithms/Sorting/heapsort.h"
 #include "Algorithms/Numerical/Horner.h"
 #include "Algorithms/Numerical/array_inversion.h"
 #include "Algorithms/Random/propabilistic_counter.h"
 #include "Algorithms/Random/array_permutations.h"
 #include "Algorithms/Random/random.h"
 #include "Data Structures/Heap.h"
+#include "Data Structures/d-aryheap.h"
 
 #define ARR_SIZE(arr) sizeof(arr) / sizeof(arr[0])
 
@@ -29,7 +31,34 @@ void print_array(T *arr, const size_t &size, std::ostream &os = std::cout)
 
 int main()
 {
-    int arr[20];
+    int arr[] = { 6,4,5,20,3,15,25,100};
+    std::cout << "Array:\n";
+    print_array(arr, ARR_SIZE(arr));
+    D_AryHeap<int,3>::array_heapify(arr, ARR_SIZE(arr),3);
+    //Heap<int>::array_heapify(arr, ARR_SIZE(arr));
+    std::cout << "After using heap: \n";
+    print_array(arr, ARR_SIZE(arr));
+    heapsort<int>(arr, ARR_SIZE(arr));
+    std::cout << "Heap sort array:\n";
+    print_array(arr, ARR_SIZE(arr));
+
+    D_AryHeap<int,3> heap(arr, ARR_SIZE(arr));
+    std::cout << heap.get_size() << " " << heap.get_capacity() << "\n";
+    heap.insert(2);
+    std::cout << heap.find(6) << "\n";
+
+    /*
+    Heap<int> heap(arr, ARR_SIZE(arr));
+    std::cout << heap.get_size() <<" "<< heap.get_capacity() << "\n";
+    heap.insert(2);
+    std::cout << heap.find(6) << "\n";
+    */
+    
+}
+
+//TEST RANDOM ALGORITHMS
+/*
+*     int arr[20];
     std::iota(arr, arr + ARR_SIZE(arr), 1);
 
     std::cout << "Random array:\n";
@@ -59,7 +88,7 @@ int main()
     std::cout << "Counter expected value: " << counter.Expected() << "\nCounter approximated value: " << counter.Approximation()<<"\n";
 
     delete[] arr2;
-}
+*/
 
 //TEST INVERSIONS
 /*

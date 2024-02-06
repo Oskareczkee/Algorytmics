@@ -64,7 +64,7 @@ public:
 		return std::uniform_real_distribution<double>(left, right)(rd);
 	}
 
-	//rolls a dice, given a chance, if roll was a success returns true, otherwise false
+	//rolls a dice, given a chance for success, if roll was a success returns true, otherwise false
 	static bool Roll(const double& chance)
 	{
 		if (chance >= 1) return true;

@@ -1,204 +1,315 @@
 #pragma once
 #include <functional>
+
 /// <summary>
-/// Heap implementation using arrays. Implements min heap, change comparator to std::greater<T>, to change to max heap
+/// Heap implementation, has static methods to create heaps from arrays
+/// This heap can be effectively used as priority queue
+/// By default this is min-heap, change comparator to make it max-heap
 /// </summary>
-/// <typeparam name="T">Type to store in heap</typeparam>
-/// <typeparam name="Comparator">Comparator to be used</typeparam>
-template <class T, class Comparator = std::less<T>>
+/// <typeparam name="Comparator">Comparator that will be used, change to std::greater to get max-heap</typeparam>
+template<class T, class Comparator = std::less<T>>
 class Heap
 {
 private:
-	const int INITIAL_SIZE = 1;
-	const int OUT_OF_RANGE = -1;
-	T* _arr;
-	int _capacity;
-	int _size;
+	T* arr = nullptr;
+	size_t size = 0;
+	size_t capacity = 1;
 
-	//HELPERS
-	//gets left son of given node, returns OUT_OF_RANGE if does not exist
-	int get_left(const int& node);
-	//gets right son of given node, returns OUT_OF_RANGE if does not exist
-	int get_right(const int& node);
-	//gets parent of given node, returns OUT_OF_RANGE if does not exist
-	int get_parent(const int& node);
+	static size_t parent(const size_t& node) { return node >> 1; }
+	static size_t left(const size_t& node)   { return  node << 1; }
+	static size_t right(const size_t& node)  { return (node << 1) + 1; }
 
-	//resizes array, doubling its capacity
+
+	T* get_array_copy(); //helper function to create a copy of array in heap
+	void copy_array(T* arr, const size_t& size);//copies arr into heap arr, assumes that arr is already heap
+	void delete_array();//deletes array
+
+	void build_heap(T* arr, const size_t& size, Comparator comp = Comparator()); //build heap from array
+	bool IsOk() { return size >= 0 && arr != nullptr; }//helper function that returns false if heap is not usable
 	void resize();
-	//pops item at given index in array, helper function
-	T pop(const int& index, Comparator comp = Comparator(),bool iAmDummyArgument=true);
 public:
+	Heap(){}
+	Heap(const size_t& _capacity) : capacity(_capacity) {}
+	Heap(T* arr, const size_t& arr_size) { build_heap(arr, arr_size); }
+	Heap(const Heap& other);
+	~Heap() { delete_array(); }
 
-	Heap(): _capacity(INITIAL_SIZE), _size(0), _arr(new T[INITIAL_SIZE]){}
-	Heap(const int& capacity);
-	~Heap() { delete[] _arr; }
+	size_t get_size() { return size; }
+	size_t get_capacity() { return capacity; }
 
-	//will add more if needed, this is basic implementation
+	/// <summary>
+	/// pops the last element
+	/// </summary>
+	void pop();
+	/// <summary>
+	/// Gets the top element, returns default value if top does not exist
+	/// </summary>
+	T top();
+	/// <summary>
+	/// Gets the top element and deletes it, returns default value if top does not exist
+	/// </summary>
+	T remove_top();
 
-	void push(const T& data, Comparator comp = Comparator());
-	T pop(Comparator comp = Comparator());
-	T pop(const T& elem, Comparator comp = Comparator());
-	T* to_array(int& arr_size_ref) const;
+	/// <summary>
+	/// Removes given element from heap, if not found nothing happens
+	/// </summary>
+	void remove(const T& val);
 
-	int size()const { return _size; }
-	int capacity()const { return _capacity; }
+	/// <summary>
+	/// Finds given value in heap's array and returns its index
+	/// If item cannot be found value < 0 is returned
+	/// </summary>
+	long long find(const T& val, Comparator comp = Comparator());
+	/// <summary>
+	/// Finds given value in heap, returns true if exists, false if not
+	/// </summary>
+	bool exists(const T& val);
+
+	/// <summary>
+	/// Changes given value in the heap to the new one, if it exists
+	/// </summary>
+	void change_value(const T& val, const T& new_val, Comparator comp = Comparator());
+
+	/// <summary>
+	/// Inserts value into heap
+	/// </summary>
+	void insert(const T& val, Comparator comp = Comparator());
+
+	/// <summary>
+	/// Inserts array of values into heap
+	/// </summary>
+	/// <param name="arr"></param>
+	/// <param name="comp"></param>
+	void insert_arr(const T* arr, const size_t& arr_size, Comparator comp = Comparator());
+
+	/// <summary>
+	/// Converts given array into heap
+	/// </summary>
+	static void array_heapify(T* arr, const size_t& size, Comparator comp = Comparator());
+	/// <summary>
+	/// Heapifies array on given node
+	/// </summary>
+	static void heapify(T* arr, const size_t& arr_size, const size_t& node, Comparator comp = Comparator());
 };
 
-template <class T, class Comparator>
-inline Heap<T, Comparator>::Heap(const int& capacity): _size(0)
-{
-	capacity < 1 ? _capacity = 1 : _capacity = capacity;
-	_arr = new T[_capacity];
-}
-
 template<class T, class Comparator>
-inline void Heap<T, Comparator>::push(const T& data, Comparator comp)
+void Heap<T, Comparator>::heapify(T* arr,const size_t& arr_size,const size_t& node, Comparator comp)
 {
-	if (_size == _capacity) //there is no space
-		resize();
+	size_t l = left(node);
+	size_t r = right(node);
 
-	_arr[_size] = data;
-	_size++;
-	int index = _size - 1;
-	int parent = get_parent(index);
+	size_t actual = node;
+	size_t change = node;
 
-	while (parent != OUT_OF_RANGE)
+	while (true)
 	{
-		//base case: data < _parent, other if comparator has been changed
-		if (comp(data, _arr[parent]))
+		if (l < arr_size && comp(arr[l], arr[actual]))
+			change = l;
+		else change = actual;
+		if (r < arr_size && comp(arr[r], arr[change]))
+			change = r;
+
+		if (actual != change)
 		{
-			std::swap(_arr[parent], _arr[index]);
-			index = parent;
-			parent = get_parent(index);
+			std::swap(arr[actual], arr[change]);
+			actual = change;
+			l = left(actual);
+			r = right(actual);
 		}
-		else
-			break;
+		else break;
 	}
 }
 
 template<class T, class Comparator>
-inline T Heap<T, Comparator>::pop(Comparator comp)
+inline void Heap<T, Comparator>::insert_arr(const T* arr, const size_t& arr_size, Comparator comp)
 {
-	return pop(0,comp, true);
+	if (!IsOk())
+		return;
+
+	for (size_t x = 0; x < arr_size; x++)
+		insert(arr[x], comp);
 }
 
 template<class T, class Comparator>
-inline T Heap<T, Comparator>::pop(const T& elem, Comparator comp)
+void Heap<T, Comparator>::array_heapify(T* arr, const size_t& size, Comparator comp)
 {
-	//find element in our array
-	int elem_index = 0;
-	bool found = false;
-	for(int x =0;x<_size;x++)
-		if (_arr[x] == elem)
-		{
-			elem_index = x;
-			found = true;
-			break;
-		}
-
-	if (!found)//if element was not found, return default
-		return T();
-
-	return pop(elem_index,comp, true);
+	//use long long, size_t is unsigned, so (size_t)0 - 1 = UINT64_MAX
+	for (long long x = size >> 1; x >= 0; x--)
+		heapify(arr, size, x,comp);
 }
 
 template<class T, class Comparator>
-inline T* Heap<T, Comparator>::to_array(int& arr_size_ref) const
+inline T* Heap<T, Comparator>::get_array_copy()
 {
-	T* output = new T[_size];
-	arr_size_ref = _size;
-	//create copy of actual heap, not to change it
-	Heap copy;
-	for (int x = 0; x < _size; x++)
-		copy.push(_arr[x]);
-
-	//pop elemnets from copy to get ordered array
-	for (int x = 0; x < _size; x++)
-		output[x] = copy.pop();
-
-	return output;
+	T* out = new T[size];
+	for (int x = 0; x < size; x++)
+		out[x] = arr[x];
+	return out;
 }
 
-
-template <class T, class Comparator>
-inline int Heap<T, Comparator>::get_left(const int& node)
+template<class T, class Comparator>
+inline void Heap<T, Comparator>::copy_array(T* arr, const size_t& size)
 {
-	int index = node * 2 + 1;
-	if (index < 0 || index > _size - 1)
-		return OUT_OF_RANGE;
+	//delete previous array if existed
+	delete_array();
+	this->arr = new T[size];
+	this->capacity = size;
+	this->size = size;
 
-	return index;
+	for (int x = 0; x < size; x++)
+		this->arr[x] = arr[x];
 }
 
-template <class T, class Comparator>
-inline int Heap<T, Comparator>::get_right(const int& node)
+template<class T, class Comparator>
+inline void Heap<T, Comparator>::delete_array()
 {
-	int index = node * 2 + 2;
-	if (index < 0 || index > _size - 1)
-		return OUT_OF_RANGE;
+	if (arr == nullptr)
+		return;
 
-	return index;
+	delete[] arr;
+	size = 0;
+	arr = nullptr;
 }
 
-template <class T, class Comparator>
-inline int Heap<T, Comparator>::get_parent(const int& node)
+template<class T, class Comparator>
+inline void Heap<T, Comparator>::build_heap(T* arr, const size_t& size, Comparator comp)
 {
-	if (node <= 0)
-		return OUT_OF_RANGE;
+	delete_array();
+	copy_array(arr, size);
 
-	int index = (node - 1) / 2;
-	if (index > _size - 1)
-		return OUT_OF_RANGE;
-
-	return index;
+	for (size_t x = size >> 1; x > 0; x--)
+		heapify(this->arr,this->size,x, comp);
 }
 
-template <class T, class Comparator>
+template<class T, class Comparator>
 inline void Heap<T, Comparator>::resize()
 {
-	_capacity *= 2; //double the capacity
+	capacity *= 2;
+	T* arr = get_array_copy();
+	size_t old_size = size;
+	delete_array();
 
-	T* temp = new T[_capacity];
-	memcpy(temp, _arr, sizeof(T) * _size);
+	this->size = old_size;
+	this->arr = new T[capacity];
 
-	delete[] _arr;
-	_arr = temp; //temp becomes new arr
+	for (size_t x = 0; x < size; x++)
+		this->arr[x] = arr[x];
+
+	delete[] arr;
 }
 
 template<class T, class Comparator>
-inline T Heap<T, Comparator>::pop(const int& index,Comparator comp, bool iAmDummyArgument)
+inline Heap<T, Comparator>::Heap(const Heap& other)
 {
-	if (_size == 0 || index > _size -1 || index < 0)
+	//array in other heap is already heapified, so we need only to make a copy
+	arr = new T[other.capacity];
+	for (size_t x = 0; x < other.size; x++)
+		arr[x] = other.arr[x];
+
+	size = other.size;
+	capacity = other.capacity;
+}
+
+template<class T, class Comparator>
+inline void Heap<T, Comparator>::pop()
+{
+	if (!IsOk())
+		return;
+	size--;
+}
+
+template<class T, class Comparator>
+inline T Heap<T, Comparator>::top()
+{
+	if(!IsOk())
+		return T();
+	return arr[0];
+}
+
+template<class T, class Comparator>
+inline T Heap<T, Comparator>::remove_top()
+{
+	if(!IsOk())
 		return T();
 
-	T output = _arr[index];
-	std::swap(_arr[index], _arr[_size - 1]);//swap this item with the last one
-	_size--;
+	T top = top();
+	std::swap(arr[0], arr[size - 1]); //swap top with last element, then pop it
+	pop();
+	heapify(arr, size, 0);
+	return top;
+}
 
+template<class T, class Comparator>
+inline void Heap<T, Comparator>::remove(const T& val)
+{
+	if (!IsOk())
+		return;
 
-	int actual = index;
-	int left = get_left(index);
-	int right = get_right(index);
-	int swap_index = 0; //index of node to swap
+	size_t i = find(val);
+	if (i < 0) //not found
+		return;
 
-	while (left != OUT_OF_RANGE && right != OUT_OF_RANGE) //till our node is not leaf
+	std::swap(arr[i], arr[size - 1]);
+	pop();
+	heapify(arr, size, i);
+}
+
+template<class T, class Comparator>
+inline long long Heap<T, Comparator>::find(const T& val, Comparator comp)
+{
+	if (!IsOk())
+		return -1;
+
+	//simple linear search
+	for (long long x = 0; x < size; x++)
+		if (arr[x] == val)
+			return x;
+
+	return -1;
+}
+
+template<class T, class Comparator>
+inline bool Heap<T, Comparator>::exists(const T& val)
+{
+	if (!IsOk())
+		return false;
+
+	return Find(val) >= 0;
+}
+
+template<class T, class Comparator>
+inline void Heap<T, Comparator>::change_value(const T& val, const T& new_val, Comparator comp)
+{
+	size_t i = Find(val);
+	if (i < 0)
+		return;
+
+	arr[i] = new_val;
+
+	while (i > 0 && !comp(arr[parent(i)], arr[i]))
 	{
-		if (right != OUT_OF_RANGE && comp(_arr[right], _arr[left]))
-			swap_index = right;
-		else
-			swap_index = left;
-
-			//heap condition is not satisified
-			if (!comp(_arr[actual], _arr[swap_index]))
-			{
-				std::swap(_arr[actual], _arr[swap_index]);
-					actual = swap_index;
-					left = get_left(actual);
-					right = get_right(actual);
-			}
-			else//condition is satisfied, we do not have to do anything
-				break;
+		std::swap(arr[i], arr[parent(i)]);
+		i = parent(i);
 	}
+}
 
-	return output;
+template<class T, class Comparator>
+inline void Heap<T, Comparator>::insert(const T& val, Comparator comp)
+{
+	if (!IsOk())
+		return;
+
+	if (size == capacity)
+		resize();
+
+	size++;
+	size_t i = size-1;
+	arr[i] = val;
+
+	//same as change value
+	while (i > 0 && !comp(arr[parent(i)], arr[i]))
+	{
+		std::swap(arr[i], arr[parent(i)]);
+		i = parent(i);
+	}
 }
