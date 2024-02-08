@@ -89,8 +89,8 @@
     <ClInclude Include="Data Structures\d-aryheap.h">
       <Filter>Pliki nagłówkowe\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="young_tableaux.h">
-      <Filter>Pliki nagłówkowe\Algorithms\Numerical</Filter>
+    <ClInclude Include="young_tableau.h">
+      <Filter>Pliki nagłówkowe\Data Structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

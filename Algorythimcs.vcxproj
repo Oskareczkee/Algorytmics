@@ -145,7 +145,7 @@
     <ClInclude Include="Data Structures\Heap.h" />
     <ClInclude Include="monge_array.h" />
     <ClInclude Include="random.h" />
-    <ClInclude Include="young_tableaux.h" />
+    <ClInclude Include="young_tableau.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

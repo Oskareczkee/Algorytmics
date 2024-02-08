@@ -17,6 +17,7 @@
 #include "Algorithms/Random/random.h"
 #include "Data Structures/Heap.h"
 #include "Data Structures/d-aryheap.h"
+#include "Data Structures/young_tableau.h"
 
 #define ARR_SIZE(arr) sizeof(arr) / sizeof(arr[0])
 
@@ -31,6 +32,7 @@ void print_array(T *arr, const size_t &size, std::ostream &os = std::cout)
 
 int main()
 {
+    /*
     int arr[] = { 6,4,5,20,3,15,25,100};
     std::cout << "Array:\n";
     print_array(arr, ARR_SIZE(arr));
@@ -47,13 +49,32 @@ int main()
     heap.insert(2);
     std::cout << heap.find(6) << "\n";
 
-    /*
+    
     Heap<int> heap(arr, ARR_SIZE(arr));
     std::cout << heap.get_size() <<" "<< heap.get_capacity() << "\n";
     heap.insert(2);
     std::cout << heap.find(6) << "\n";
     */
-    
+
+    young_tableau<int,std::greater<int>> tableau(4,4,INT32_MIN);
+    int arr[] = { 9,16,3,2,4,8,5,14,12 };
+    tableau.fill(arr, 9);
+    tableau.insert(32);
+    tableau.insert(1);
+    tableau.extract_minmax();
+
+    int** arrt = tableau.get_array();
+    for (int x = 0; x < tableau.get_height(); x++)
+    {
+        for (int y = 0; y < tableau.get_width(); y++)
+        {
+            if (arrt[x][y] == INT32_MIN)
+                std::cout << "-inf" << "\t";
+            else
+                std::cout << arrt[x][y] << "\t";
+        }
+        std::cout << "\n";
+    }
 }
 
 //TEST RANDOM ALGORITHMS
