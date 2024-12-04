@@ -37,6 +37,15 @@
     <Filter Include="Pliki nagłówkowe\Algorithms\Random">
       <UniqueIdentifier>{d864bbae-d269-4cf5-896c-ecd17e43631c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\Includes">
+      <UniqueIdentifier>{284b4d7b-e25e-4b30-a272-5b4c702caaa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Algorithms\Sorting\Tests">
+      <UniqueIdentifier>{eaab9954-ca66-4056-9ec6-7f1acc237ca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Utility">
+      <UniqueIdentifier>{aac0b734-b774-4799-882b-b7052a5884d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algorythimcs.cpp">
@@ -71,12 +80,6 @@
     <ClInclude Include="monge_array.h">
       <Filter>Pliki nagłówkowe\Algorithms\Numerical</Filter>
     </ClInclude>
-    <ClInclude Include="array_permutations.h">
-      <Filter>Pliki nagłówkowe\Algorithms\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="random.h">
-      <Filter>Pliki nagłówkowe\Algorithms\Random</Filter>
-    </ClInclude>
     <ClInclude Include="Data Structures\Heap.h">
       <Filter>Pliki nagłówkowe\Data Structures</Filter>
     </ClInclude>
@@ -89,8 +92,56 @@
     <ClInclude Include="Data Structures\d-aryheap.h">
       <Filter>Pliki nagłówkowe\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="young_tableau.h">
+    <ClInclude Include="Algorithms\Random\random.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Random\array_permutations.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="include_sorting.h">
+      <Filter>Pliki źródłowe\Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="include_numerical.h">
+      <Filter>Pliki źródłowe\Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="include_random.h">
+      <Filter>Pliki źródłowe\Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="include_data_structures.h">
+      <Filter>Pliki źródłowe\Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="counting_sort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Sorting\stooge_sort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Sorting\quicksort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="lsd_radix_sort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="msd_radix_sort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="columnsort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="test_columnsort.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="test_radix_sorts.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Sorting\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="testing.h">
+      <Filter>Pliki nagłówkowe\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Data Structures\young_tableau.h">
       <Filter>Pliki nagłówkowe\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="order_statistics.h">
+      <Filter>Pliki nagłówkowe\Algorithms\Searching</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

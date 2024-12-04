@@ -1,0 +1,10 @@
+#pragma once
+#include "Algorithms/Sorting/insertion_sort.h"
+#include "Algorithms/Sorting/selection_sort.h"
+#include "Algorithms/Sorting/merge_sort.h"
+#include "Algorithms/Searching/binary_search.h"
+#include "Algorithms/Searching/linear_search.h"
+#include "Algorithms/Sorting/bubble_sort.h"
+#include "Algorithms/Sorting/heapsort.h"
+#include "Algorithms/Sorting/quicksort.h"
+#include "Algorithms/Sorting/stooge_sort.h"

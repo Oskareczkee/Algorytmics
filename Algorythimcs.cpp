@@ -3,37 +3,31 @@
 #include <numeric>
 #include <random>
 
-#include "Algorithms/Sorting/insertion_sort.h"
-#include "Algorithms/Sorting/selection_sort.h"
-#include "Algorithms/Sorting/merge_sort.h"
-#include "Algorithms/Searching/binary_search.h"
-#include "Algorithms/Searching/linear_search.h"
-#include "Algorithms/Sorting/bubble_sort.h"
-#include "Algorithms/Sorting/heapsort.h"
-#include "Algorithms/Numerical/Horner.h"
-#include "Algorithms/Numerical/array_inversion.h"
-#include "Algorithms/Random/propabilistic_counter.h"
-#include "Algorithms/Random/array_permutations.h"
-#include "Algorithms/Random/random.h"
-#include "Data Structures/Heap.h"
-#include "Data Structures/d-aryheap.h"
-#include "Data Structures/young_tableau.h"
-
-#define ARR_SIZE(arr) sizeof(arr) / sizeof(arr[0])
-
-template <class T>
-void print_array(T *arr, const size_t &size, std::ostream &os = std::cout)
-{
-    os << "{ ";
-    for (int x = 0; x < size; x++)
-        os << arr[x] << " ";
-    os << " }\n";
-}
+#include "Includes/include_sorting.h"
+#include "Includes/include_numerical.h"
+#include "Includes/include_random.h"
+#include "Includes/include_data_structures.h"
+#include "Utility/testing.h"
+#include "order_statistics.h"
 
 int main()
 {
-    /*
-    int arr[] = { 6,4,5,20,3,15,25,100};
+    int arr[] = { 6,19,4,12,14,9,15,7,8,11,3,13,2,5,10 };
+    int rand_arr[20];
+    std::iota(rand_arr, rand_arr + ARR_SIZE(rand_arr), 1);
+    std::mt19937 rd;
+    std::shuffle(rand_arr, rand_arr + ARR_SIZE(arr), std::mt19937(rd()));
+
+    int out = select_ith(arr, ARR_SIZE(arr),5,5, std::greater<int>());
+    std::cout << "Array: \n";
+    print_array(arr, ARR_SIZE(arr));
+    std::cout << "ith order element: " << out << "\n";
+}
+
+
+//TEST HEAP, YOUNG TABLEAU
+/*
+*   int arr[] = { 6,4,5,20,3,15,25,100};
     std::cout << "Array:\n";
     print_array(arr, ARR_SIZE(arr));
     D_AryHeap<int,3>::array_heapify(arr, ARR_SIZE(arr),3);
@@ -54,7 +48,6 @@ int main()
     std::cout << heap.get_size() <<" "<< heap.get_capacity() << "\n";
     heap.insert(2);
     std::cout << heap.find(6) << "\n";
-    */
 
     young_tableau<int,std::greater<int>> tableau(4,4,INT32_MIN);
     int arr[] = { 9,16,3,2,4,8,5,14,12 };
@@ -75,11 +68,11 @@ int main()
         }
         std::cout << "\n";
     }
-}
+*/
 
 //TEST RANDOM ALGORITHMS
 /*
-*     int arr[20];
+     int arr[20];
     std::iota(arr, arr + ARR_SIZE(arr), 1);
 
     std::cout << "Random array:\n";

@@ -18,6 +18,14 @@ public:
 		return std::uniform_int_distribution<int>(left, right-1)(rd);
 	}
 
+	//Generates 64 byte pseudo random number in range [left,right)
+	long long NextLong(const long long& left, const long long& right)
+	{
+		if (right <= left)
+			return left - 1;
+		return std::uniform_int_distribution<long long>(left, right - 1)(rd);
+	}
+
 	//Generated pseudo random double in range [left, right]
 	double NextDouble(const double& left, const double& right)
 	{
@@ -54,6 +62,14 @@ public:
 		if (right <= left)
 			return left-1;
 		return std::uniform_int_distribution<int>(left, right-1)(rd);
+	}
+
+	//Generates 64 byte pseudo random number in range [left,right)
+	static long long NextLong(const long long& left, const long long& right)
+	{
+		if (right <= left)
+			return left - 1;
+		return std::uniform_int_distribution<long long>(left, right-1)(rd);
 	}
 
 	//Generated pseudo random double in range [left, right]

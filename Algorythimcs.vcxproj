@@ -132,20 +132,34 @@
   <ItemGroup>
     <ClInclude Include="Algorithms\Numerical\array_inversion.h" />
     <ClInclude Include="Algorithms\Numerical\horner.h" />
+    <ClInclude Include="Algorithms\Random\array_permutations.h" />
     <ClInclude Include="Algorithms\Random\propabilistic_counter.h" />
+    <ClInclude Include="Algorithms\Random\random.h" />
     <ClInclude Include="Algorithms\Searching\binary_search.h" />
     <ClInclude Include="Algorithms\Searching\linear_search.h" />
     <ClInclude Include="Algorithms\Sorting\heapsort.h" />
     <ClInclude Include="Algorithms\Sorting\insertion_sort.h" />
     <ClInclude Include="Algorithms\Sorting\merge_sort.h" />
+    <ClInclude Include="Algorithms\Sorting\quicksort.h" />
     <ClInclude Include="Algorithms\Sorting\selection_sort.h" />
-    <ClInclude Include="array_permutations.h" />
+    <ClInclude Include="Algorithms\Sorting\stooge_sort.h" />
     <ClInclude Include="Ch2.h" />
+    <ClInclude Include="columnsort.h" />
+    <ClInclude Include="counting_sort.h" />
     <ClInclude Include="Data Structures\d-aryheap.h" />
     <ClInclude Include="Data Structures\Heap.h" />
+    <ClInclude Include="Data Structures\young_tableau.h" />
+    <ClInclude Include="include_data_structures.h" />
+    <ClInclude Include="include_numerical.h" />
+    <ClInclude Include="include_random.h" />
+    <ClInclude Include="include_sorting.h" />
     <ClInclude Include="monge_array.h" />
-    <ClInclude Include="random.h" />
-    <ClInclude Include="young_tableau.h" />
+    <ClInclude Include="lsd_radix_sort.h" />
+    <ClInclude Include="msd_radix_sort.h" />
+    <ClInclude Include="order_statistics.h" />
+    <ClInclude Include="testing.h" />
+    <ClInclude Include="test_columnsort.h" />
+    <ClInclude Include="test_radix_sorts.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
